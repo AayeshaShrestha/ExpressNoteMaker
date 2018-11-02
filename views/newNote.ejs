@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>organizeMe</title>
+
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a class="navbar-brand" href="/">Note Maker</a>
+          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/newNotes">Make New<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/viewNotes">View Notes</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="jumbotron">
+        <h2>Store Your Important Notes </h2><br>
+        <form method="post" action="/saveNote">
+            <div class="form-group">
+              <label>Title : </label>
+              <input type="text" name="title" class="form-control" id="title" placeholder="Note Title" />
+            </div>
+            <div class="form-group">
+              <label>Description : </label>
+              <textarea class="form-control" name="description" id="description" placeholder="Your Notes Here"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Save Note</button>&nbsp
+      </form>
+
+    </div>
+  </div>
+
+
+  </body>
+</html>
