@@ -13,7 +13,7 @@ router.get('/signup',function(req, res){
 });
 
 router.post('/signup',function(req, res){
-  //console.log('req...', req.body);
+  console.log('req...', req.body);
 
   var user = new Users({
     username : req.body.username,
@@ -21,11 +21,16 @@ router.post('/signup',function(req, res){
     //repassword : req.body.repassword
   });
 
-  var promise = user.save();
-  promise.then((user) => {
-    console.log('user signed with values', user);
-    res.render('newNote');
-  });
+  if(req.body.password == req.body.repassword){
+    var promise = user.save();
+    promise.then((user) => {
+      console.log('user signed with values', user);
+      res.redirect('/newNotes');
+    });
+  }else{
+    console.log("passwords donot match");
+  }
+
 
 });
 
@@ -35,6 +40,7 @@ router.post('/login',function(req,res){
     Users.findOne({username : req.body.username, password : req.body.password}, function(err, user){
       if(user != null){
         console.log('Logged in with ', user);
+        res.redirect('/viewNotes');
       }else{
         console.log('User not valid');
       }
@@ -54,7 +60,10 @@ router.get('/newNotes', function(req, res) {
 });
 
 router.get('/viewNotes',function(req, res){
-  res.render('viewNotes');
+  Notes.find().exec(function(err, notes){
+    res.render('viewNotes', {notes});
+    console.log(notes);
+  });
 });
 
 router.post('/saveNote',function(req, res, next){
@@ -68,6 +77,11 @@ router.post('/saveNote',function(req, res, next){
   var promise = note.save();
   promise.then((note) => {
     console.log("Your note is ", note);
+
+    Notes.find().exec(function(err, notes){
+      res.render('viewNotes', {notes});
+      console.log(notes);
+    });
   })
 });
 

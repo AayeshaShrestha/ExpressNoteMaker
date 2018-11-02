@@ -34,13 +34,16 @@
 
     <div class="my-3 p-3 bg-white rounded box-shadow" style="margin:25px;">
       <h4 class="border-bottom border-gray pb-2 mb-0">My Notes</h4>
-      <div class="well" style="margin-top : 8px;">
-        <h5><strong>Title Here </strong></h5>
-    		<p>Description Hereadasda</p>
-        <a class="btn btn-primary" href="#"><i class="fa fa-pencil"></i> Edit</a>
-        &nbsp
-       <a class="btn btn-danger" href="#"><i class="fa fa-trash"></i> Delete</a>
-    </div>
+
+      <% notes.forEach(function(note,i){ %>
+        <div class="well" style="margin-top : 8px;">
+          <h5><strong> <%= note.title %> </strong></h5>
+      		<p> <%= note.description %> </p>
+          <a class="btn btn-primary" href="#"><i class="fa fa-pencil"></i> Edit</a>
+          &nbsp
+         <a class="btn btn-danger" href="#"><i class="fa fa-trash"></i> Delete</a>
+      </div>
+    <% }) %>
   </div>
 
     </div>
