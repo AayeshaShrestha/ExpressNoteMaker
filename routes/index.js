@@ -21,17 +21,20 @@ router.post('/signup',function(req, res){
     //repassword : req.body.repassword
   });
 
-  if(req.body.password == req.body.repassword){
-    var promise = user.save();
-    promise.then((user) => {
-      console.log('user signed with values', user);
-      res.redirect('/newNotes');
-    });
+  if(req.body.username != '' && req.body.password != '' && req.body.repassword != '') {
+      if(req.body.password == req.body.repassword){
+        var promise = user.save();
+        promise.then((user) => {
+          console.log('user signed with values', user);
+          res.redirect('/newNotes');
+        });
+      }
+      else{
+      console.log("passwords donot match");
+      }
   }else{
-    console.log("passwords donot match");
+    console.log("Please fill all the fields");
   }
-
-
 });
 
 router.post('/login',function(req,res){
@@ -62,7 +65,7 @@ router.get('/newNotes', function(req, res) {
 router.get('/viewNotes',function(req, res){
   Notes.find().exec(function(err, notes){
     res.render('viewNotes', {notes});
-    console.log(notes);
+    //console.log(notes);
   });
 });
 
@@ -80,9 +83,16 @@ router.post('/saveNote',function(req, res, next){
 
     Notes.find().exec(function(err, notes){
       res.render('viewNotes', {notes});
-      console.log(notes);
+      //console.log(notes);
     });
   })
 });
+
+router.get('/deleteNote/:id', function(req, res){
+  console.log(req.params.id);
+  Notes.remove({ _id : req.params.id }, function(err, delNote){
+    res.redirect('/viewNotes');
+  });
+})
 
 module.exports = router;

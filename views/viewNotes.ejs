@@ -41,7 +41,7 @@
       		<p> <%= note.description %> </p>
           <a class="btn btn-primary" href="#"><i class="fa fa-pencil"></i> Edit</a>
           &nbsp
-         <a class="btn btn-danger" href="#"><i class="fa fa-trash"></i> Delete</a>
+         <a class="btn btn-danger" href="/deleteNote/<%= note._id %>"><i class="fa fa-trash"></i> Delete</a>
       </div>
     <% }) %>
   </div>
