@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Note Maker</title>
+
+        <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/style.css">
+
+    </head>
+
+    <body>
+        <div class="container">
+          <div class="my-3 p-3 bg-white rounded box-shadow" style="margin:25px;">
+            <h4 class="border-bottom border-gray pb-2 mb-0">My Notes</h4>
+						<form action="/saveEdited" method="post">
+              <input type="hidden" name="_id" value="<%= note._id %>">
+							<div class="form-group">
+								Title : <input type="text" name="title" value="<%= note.title %>" class="form-control" id="title">
+              </div><br>
+
+							<div class="form-group">
+								Description : <textarea type="text" name="description" class="form-control" id="description">
+                      <%= note.description %>
+                </textarea>
+							</div>
+							<button type="submit" class="btn">Save Changes!</button>
+						</form>
+				</div>
+				</div>
+    </body>
+
+</html>

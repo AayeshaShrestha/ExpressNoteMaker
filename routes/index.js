@@ -88,11 +88,30 @@ router.post('/saveNote',function(req, res, next){
   })
 });
 
+router.get('/editNote/:id', function(req, res) {
+  var noteId = req.params.id;
+  Notes.findOne({ _id : noteId}).exec(function(err, note){
+    res.render('editNote',{note});
+  });
+});
+
 router.get('/deleteNote/:id', function(req, res){
   console.log(req.params.id);
   Notes.remove({ _id : req.params.id }, function(err, delNote){
     res.redirect('/viewNotes');
   });
-})
+});
+
+router.post('/saveEdited', function(req, res){
+  //res.send(req.body);
+  Notes.findOneAndUpdate({ _id : req.body._id }, { $set : req.body }, (err, note) => {
+    if(!err){
+      res.redirect('/viewNotes');
+    }else{
+      console.log("Error!!");
+    }
+  })
+
+});
 
 module.exports = router;
